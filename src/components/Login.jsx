@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react';
-import { GithubAuthProvider, GoogleAuthProvider, getAuth, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { FacebookAuthProvider, GithubAuthProvider, GoogleAuthProvider, getAuth, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import app from '../firebase/firebase.config';
 import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { LoggedUserContext } from '../layout/Main';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGithub, faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { faFacebook, faGithub, faGoogle } from '@fortawesome/free-brands-svg-icons';
 
 const Login = () => {
     const [loggedUser, setLoggedUser] = useContext(LoggedUserContext);
@@ -14,6 +14,7 @@ const Login = () => {
     const auth = getAuth(app)
     const githubProvider = new GithubAuthProvider();
     const googleProvider = new GoogleAuthProvider();
+    const facebookProvider = new FacebookAuthProvider();
 
     const handleLogin = (event) => {
         setError('');
@@ -42,7 +43,7 @@ const Login = () => {
         signInWithEmailAndPassword(auth, email, password)
             .then((result) => {
                 const user = result.user;
-                console.log(result.user)
+                // console.log(result.user)
                 toast.success('Successfully Logged In')
                 setSuccess('Successfully Logged In')
                 event.target.reset();
@@ -59,7 +60,7 @@ const Login = () => {
         signInWithPopup(auth, githubProvider)
             .then((result) => {
                 const user = result.user;
-                console.log(result.user)
+                // console.log(result.user)
                 toast.success('Successfully Logged In')
                 setSuccess('Successfully Logged In')
                 setLoggedUser(user)
@@ -76,7 +77,22 @@ const Login = () => {
         signInWithPopup(auth, googleProvider)
             .then((result) => {
                 const user = result.user;
-                console.log(result.user)
+                // console.log(result.user)
+                toast.success('Successfully Logged In')
+                setSuccess('Successfully Logged In')
+                setLoggedUser(user)
+            })
+            .catch((error) => {
+                toast.error("Something Wrong!!!!!!!!")
+                setError(error.message)
+                // console.log(error.message)
+            })
+    }
+    const handleFacebookLogin = () => {
+        signInWithPopup(auth, facebookProvider)
+            .then((result) => {
+                const user = result.user;
+                // console.log(result.user)
                 toast.success('Successfully Logged In')
                 setSuccess('Successfully Logged In')
                 setLoggedUser(user)
@@ -106,6 +122,7 @@ const Login = () => {
                         <button onClick={handleGithubLogin} className='bg-[#24292D] hover:bg-[#24292dab]
                         text-white p-2 rounded font-semibold flex items-center gap-4'><FontAwesomeIcon className='text-white text-3xl' icon={faGithub} />Sign in with GitHub</button>
                         <button onClick={handleGoogleLogin} className='bg-[#4285F4] hover:bg-[#1262e4] text-white p-2 rounded font-semibold flex items-center gap-4'><FontAwesomeIcon className='text-white text-3xl' icon={faGoogle} />Sign in with Google</button>
+                        <button onClick={handleFacebookLogin} className='bg-[#5070A7] hover:bg-[#4268aa] text-white p-2 rounded font-semibold flex items-center gap-4'><FontAwesomeIcon className='text-white text-3xl' icon={faFacebook} />Sign in with Facebook</button>
                     </div>
                     <p className='my-2'>Don't have account? Go here <Link to={'/register'} className='link text-blue-400'>Register</Link></p>
                 </div>

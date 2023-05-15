@@ -3,7 +3,7 @@ import React from 'react';
 const Home = () => {
     return (
         <div>
-            This is home page
+            <h2 className='text-center text-5xl font-semibold text-sky-200 mt-10'>This is Home Page</h2>
         </div>
     );
 };
