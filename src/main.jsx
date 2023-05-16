@@ -12,12 +12,14 @@ import Login from './components/Login.jsx'
 import ForgotPS from './components/ForgotPS.jsx'
 import MyAccount from './components/MyAccount.jsx'
 import { Toaster } from 'react-hot-toast'
+import ErrorPage from './components/ErrorPage'
 
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Main></Main>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: '/',

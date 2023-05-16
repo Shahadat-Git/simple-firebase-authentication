@@ -72,7 +72,7 @@ const Register = () => {
         <div>
             <h3 className='text-center bg-slate-400 text-3xl text-white py-4 my-2 rounded-lg'>Register Here</h3>
             <h3 className={`text-center text-2xl my-2 ${success ? 'text-sky-400' : 'text-red-500'}`}>{success ? success : error}</h3>
-            <form onSubmit={handleResigter} className='border rounded w-2/3 lg:w-1/2  mx-auto text-center'>
+            <form onSubmit={handleResigter} className='border rounded w-11/12 lg:w-1/2  mx-auto text-center'>
                 <input type="text" id='name' name='name' placeholder="Your Name" className="input input-bordered input-info w-4/5 lg:w-full max-w-xs m-3" required />
                 <br />
                 <input type="email" name='email' id='email' placeholder="Your Email" className="input input-bordered input-info w-4/5 lg:w-full max-w-xs m-3" required />
